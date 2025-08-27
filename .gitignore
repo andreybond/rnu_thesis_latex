@@ -1,0 +1,28 @@
+# LaTeX generated files
+*.aux
+*.bbl
+*.blg
+*.log
+*.pdf
+*.toc
+*.out
+*.synctex.gz
+*.run.xml
+*.bcf
+
+# Editor-specific files
+.vscode/
+
+# Git internal files (optional, since .git is already ignored by Git itself)
+.git/
+
+# Miscellaneous
+*.bak
+*.sav
+*.old
+
+# Keep source files
+!*.tex
+!*.bib
+!*.cls
+!README.md

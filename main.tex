@@ -1,43 +1,79 @@
-\documentclass{isma-thesis} % add [calibri] or [citestyle=footnote] if desired
-\setthesistitle{Your Thesis Title: A Concise, Specific, Measurable Aim}
-\setthesisauthor{Firstname Lastname}
-\setthesisyear{2025}
-\setthesiscity{Riga-LV}
-\setthesissupervisor{Prof. Name Surname}
+\documentclass{isma-thesis}
+
+\usepackage[protrusion]{microtype}
+
+% --- Bibliography via biblatex ---
+\usepackage[backend=biber,style=ieee,sorting=nty,maxbibnames=99]{biblatex}
+\addbibresource{bibliography/references.bib}
+
+% ====== Fill these in (example placeholders) ======
+\setthesisinfoLV
+  {Darbinieku motivācijas sistēmas pilnveide uzņēmumā X}% LV Title
+  {Vārds Uzvārds}% LV Student
+  {Dr. Prof. Vadītāja Vārds Uzvārds, PhD}% LV Supervisor
+  {42484 Informācijas sistēmas (bak.)}% LV Study programme
+  {Dabaszinātņu un datortehnoloģiju katedra}% LV Department
+  {2025}% Year
+
+\setthesisinfoEN
+  {Improvement of Employee Motivation System at Enterprise X}% EN Title
+  {Name Surname}% EN Student
+  {Dr. Prof. Supervisor Name Surname, PhD}% EN Supervisor
+  {42484 Information Systems (BSc)}% EN Study programme
+  {Department of Natural Sciences and Computer Engineering}% EN Department
+  {2025}% Year
 
 \begin{document}
 
-% --- Front matter: unnumbered ---
-\makethesistitlepage
+\input{a_frontmatter/title_page_lv}
+\input{a_frontmatter/title_page_en}
 
-% Optional: declaration & acknowledgments (remove if not needed)
-\thesisdeclaration
-\thesisacknowledgments
+% Page numbering starts at Title page but number not printed there (done).
+% Show numbers from here:
+\pagenumbering{arabic}
 
-% Optional abstracts (English + Latvian). Remove if not required for BSc.
-\thesisabstracts
+% ===== Abstracts & Keywords =====
+\input{a_frontmatter/abstract_lv}
+\input{a_frontmatter/abstract_en}
+\input{a_frontmatter/keywords}
 
-% Table of contents (unnumbered)
-% \addcontentsline{toc}{chapter}{Table of Contents}
-\thesistoc
+% ===== Table of Contents (and optional lists) =====
+\tableofcontents
+\ifshowlotlof
+  \listoffigures
+  \listoftables
+\fi
+\clearpage
 
-% --- Main matter: page numbering starts here (1) ---
-\startmainmatter
+% ===== Chapters =====
+% Unnumbered Introduction (still added to ToC)
+\input{b_chapters/a_introduction/introduction}
 
-\include{chapters/a_introduction/introduction}
-\include{chapters/chapter1/chapter1}
-\include{chapters/chapter2/chapter2}
-\include{chapters/chapter3/chapter3}
-\include{chapters/chapter4/chapter4}
-\include{chapters/chapter5/chapter5}
-\include{chapters/z_conclusions/conclusions}
+\input{b_chapters/chapter1/chapter1}
+\input{b_chapters/chapter2/chapter2}
+\input{b_chapters/chapter3/chapter3}
+\input{b_chapters/chapter4/chapter4}
+\input{b_chapters/chapter5/chapter5}
 
-% Bibliography
-% \printbibliography
-\printbibliography[heading=bibintoc,title={List of References}]
+% % ===== Conclusions =====
+% \include{chapters/x_conclusions/conclusions}
+% \include{chapters/y_references/references.tex}
 
-% Appendices (optional)
+% % ===== Literature =====
+% \printliterature
+% ===== Conclusions =====
+\input{b_chapters/x_conclusions/conclusions}
+
+% ===== Literature =====
+\printbibliography[heading=bibintoc,title=Literature]
+
+
+% ===== Appendices =====
 \appendix
-\include{appendices/appendixA}
+\input{y_backmatter/appendices/appendixA}
+
+% ===== Declarations & Acknowledgments (if needed at end) =====
+\input{y_backmatter/declaration}
+\input{y_backmatter/acknowledgments}
 
 \end{document}
