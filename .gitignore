@@ -9,9 +9,14 @@
 *.synctex.gz
 *.run.xml
 *.bcf
+*.loa
+*.lof
+*.lol
+*.lot
 
 # Editor-specific files
 .vscode/
+_minted-main/
 
 # Git internal files (optional, since .git is already ignored by Git itself)
 .git/
