@@ -28,6 +28,11 @@
 \titleformat{\subsection}[hang]{\bfseries\normalsize}{\thesubsection.}{0.6em}{}
 \titlespacing*{\subsection}{0pt}{*1.6}{*0.6}
 
+% Match starred chapter heads (LoF/LoT/LoA/LoL, Abstract, etc.)
+\titleformat{name=\chapter,numberless}[hang]
+  {\bfseries\fontsize{16pt}{16pt}\selectfont}{}{0pt}{}
+\titlespacing*{name=\chapter,numberless}{0pt}{*3}{*1.2}
+
 \RequirePackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
@@ -38,12 +43,80 @@
 \RequirePackage{tocloft}
 \setlength{\cftbeforechapskip}{6pt}
 
+% ---- Unify meta-list/ToC title styling with chapter (16 pt bold) ----
+\renewcommand{\cfttoctitlefont}{\bfseries\fontsize{16pt}{16pt}\selectfont}
+\renewcommand{\cftloftitlefont}{\bfseries\fontsize{16pt}{16pt}\selectfont}
+\renewcommand{\cftlottitlefont}{\bfseries\fontsize{16pt}{16pt}\selectfont}
+
+% Optional: match the after-title spacing to your chapter spacing
+\renewcommand{\cftaftertoctitle}{\par\vspace{1.2\baselineskip}}
+\renewcommand{\cftafterloftitle}{\par\vspace{1.2\baselineskip}}
+\renewcommand{\cftafterlottitle}{\par\vspace{1.2\baselineskip}}
+
 \RequirePackage{graphicx}
 \graphicspath{{chapters/chapter1/assets/}{frontmatter/assets/}}
+
 \RequirePackage{caption}
-\captionsetup{font=normalsize,labelfont=bf}
-% Figure captions centered (title under figure); Table title above by default
-\captionsetup[figure]{justification=centering}
+\RequirePackage{ragged2e} % for \RaggedLeft (better ragged-left = flush-right)
+
+% Global defaults
+\captionsetup{
+  font=normalsize,
+  labelfont=bf,
+  labelsep=period,
+  skip=6pt
+}
+
+% Per-type rules (apply after all packages are loaded)
+\AtBeginDocument{%
+  % Figures: caption below, centered
+  \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
+
+  % Tables: caption above, RIGHT-justified
+  \captionsetup[table]{position=top, justification=RaggedLeft, singlelinecheck=false}
+
+  % Algorithms: caption above (default alignment is fine)
+  \captionsetup[algorithm]{position=top}
+
+  % Listings (minted[newfloat]): caption above, RIGHT-justified
+  \captionsetup[listing]{position=top, justification=RaggedLeft, singlelinecheck=false}
+}
+
+% Source line for figures (use before \caption inside a figure)
+\newcommand{\figsource}[1]{%
+  \captionsetup{type=figure}%
+  \caption*{\emph{Source: #1}}%
+}
+
+
+
+
+% Per-type tweaks (use AtBeginDocument so types from external pkgs exist)
+\AtBeginDocument{%
+  % Figures: caption below, centered
+  \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
+
+  % Tables: caption above, ragged-right (no forced centering)
+  \captionsetup[table]{position=top, justification=raggedright, singlelinecheck=false}
+
+  % Algorithms: caption above, ragged-right, name "Algorithm"
+  \captionsetup[algorithm]{position=top, justification=raggedright,
+                           singlelinecheck=false, name=Algorithm}
+
+  % Listings (minted[newfloat]): caption above, ragged-right, name "Listing"
+  \captionsetup[listing]{position=top, justification=raggedright,
+                         singlelinecheck=false, name=Listing}
+}
+
+% Number algorithms/listings within chapters (Algorithm 2.1, Listing 3.2)
+% (safe even if a type is missing)
+\RequirePackage{chngcntr}
+\makeatletter
+\@ifundefined{c@algorithm}{}{ \counterwithin{algorithm}{chapter} }
+\@ifundefined{c@listing}{}{  \counterwithin{listing}{chapter}  }
+\makeatother
+
+
 
 \RequirePackage{booktabs}
 \RequirePackage{array}
@@ -146,7 +219,7 @@
 }
 
 % ===== Front-matter formatting =====
-\renewcommand{\frontmatterpage}{}
+\providecommand{\frontmatterpage}{}
 
 % ===== Utilities =====
 % Unnumbered chapter that appears in ToC
@@ -154,10 +227,6 @@
   \chapter*{#1}\addcontentsline{toc}{chapter}{#1}%
 }
 
-% % Lists of figures/tables optional toggle
-% \newif\ifshowlists
-% \showlistsfalse
-% \newcommand{\showlists}{\showliststrue}
 % Lists of Figures/Tables optional toggle (rename to avoid TeX primitive \showlists)
 \newif\ifshowlotlof
 \showlotloffalse

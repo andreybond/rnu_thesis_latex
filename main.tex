@@ -2,9 +2,17 @@
 
 \usepackage[protrusion]{microtype}
 
+% --- Algorithms (float + pseudocode)
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+
+% % --- Code listings with minted (creates a 'listing' float)
+\usepackage[newfloat]{minted} % compile with -shell-escape
+
+
 % --- Bibliography via biblatex ---
 \usepackage[backend=biber,style=ieee,sorting=nty,maxbibnames=99]{biblatex}
-\addbibresource{bibliography/references.bib}
+\addbibresource{x_bibliography/references.bib}
 
 % ====== Fill these in (example placeholders) ======
 \setthesisinfoLV
@@ -39,11 +47,22 @@
 
 % ===== Table of Contents (and optional lists) =====
 \tableofcontents
-\ifshowlotlof
-  \listoffigures
-  \listoftables
-\fi
+
+% ---- Meta lists: each on its own page, and not added to ToC ----
 \clearpage
+\begingroup\let\addcontentsline\relax\listoffigures\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listoftables\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listofalgorithms\endgroup
+
+\clearpage
+\begingroup\let\addcontentsline\relax\listoflistings\endgroup
+\clearpage
+
+
 
 % ===== Chapters =====
 % Unnumbered Introduction (still added to ToC)
@@ -55,12 +74,6 @@
 \input{b_chapters/chapter4/chapter4}
 \input{b_chapters/chapter5/chapter5}
 
-% % ===== Conclusions =====
-% \include{chapters/x_conclusions/conclusions}
-% \include{chapters/y_references/references.tex}
-
-% % ===== Literature =====
-% \printliterature
 % ===== Conclusions =====
 \input{b_chapters/x_conclusions/conclusions}
 
