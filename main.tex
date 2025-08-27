@@ -1,0 +1,43 @@
+\documentclass{isma-thesis} % add [calibri] or [citestyle=footnote] if desired
+\setthesistitle{Your Thesis Title: A Concise, Specific, Measurable Aim}
+\setthesisauthor{Firstname Lastname}
+\setthesisyear{2025}
+\setthesiscity{Riga-LV}
+\setthesissupervisor{Prof. Name Surname}
+
+\begin{document}
+
+% --- Front matter: unnumbered ---
+\makethesistitlepage
+
+% Optional: declaration & acknowledgments (remove if not needed)
+\thesisdeclaration
+\thesisacknowledgments
+
+% Optional abstracts (English + Latvian). Remove if not required for BSc.
+\thesisabstracts
+
+% Table of contents (unnumbered)
+% \addcontentsline{toc}{chapter}{Table of Contents}
+\thesistoc
+
+% --- Main matter: page numbering starts here (1) ---
+\startmainmatter
+
+\include{chapters/a_introduction/introduction}
+\include{chapters/chapter1/chapter1}
+\include{chapters/chapter2/chapter2}
+\include{chapters/chapter3/chapter3}
+\include{chapters/chapter4/chapter4}
+\include{chapters/chapter5/chapter5}
+\include{chapters/z_conclusions/conclusions}
+
+% Bibliography
+% \printbibliography
+\printbibliography[heading=bibintoc,title={List of References}]
+
+% Appendices (optional)
+\appendix
+\include{appendices/appendixA}
+
+\end{document}
