@@ -62,10 +62,15 @@
 \RequirePackage{caption}
 \RequirePackage{ragged2e} % for \RaggedLeft (better ragged-left = flush-right)
 
-% ===== Totals & counts =====
-\RequirePackage{totpages}  % provides \ref{TotPages}
-\RequirePackage{totcount}  % totals of counters across doc runs
-\RequirePackage{etoolbox}
+% ===== Manual placeholders for thesis scope =====
+% Users should manually set these values by counting their content
+\newcommand{\totalpages}{XX}        % Total pages - set manually
+\newcommand{\totaltables}{X}        % Total tables - set manually  
+\newcommand{\totalfigures}{X}       % Total figures - set manually
+\newcommand{\totalalgorithms}{X}    % Total algorithms - set manually
+\newcommand{\totallistings}{X}      % Total listings - set manually
+\newcommand{\totalannexes}{X}       % Total annexes - set manually
+\newcommand{\totalreferences}{X}    % Total references - set manually
 
 % Global defaults
 \captionsetup{
@@ -99,66 +104,41 @@
 
 
 
-% Annex counter: counts \chapter after \appendix
-\newcounter{annex}
-\newif\ifinappendix
-\inappendixfalse
-
-\pretocmd{\appendix}{\inappendixtrue\setcounter{annex}{0}}{}{}
-% increment annex at each chapter once in appendix
-\pretocmd{\chapter}{\ifinappendix\stepcounter{annex}\fi}{}{}
-
-% Count printed bibliography entries with biblatex
-\newcounter{refcount}
-
-% Safe getters with fallback to 0 on the first run
-\newcommand{\TotalOrZero}[1]{%
-  \ifcsname c@#1\endcsname%
-    \total{#1}%
-  \else%
-    0%
-  \fi%
-}
-
-% Hook for biblatex if it's loaded
-\AtBeginDocument{%
-  \@ifpackageloaded{biblatex}{%
-    % This runs for every entry that actually gets printed
-    \AtEveryBibitem{\stepcounter{refcount}}%
-  }{}%
+% Commands to set the manual values (users should call these in main.tex)
+\newcommand{\setthesisscope}[7]{%
+  \renewcommand{\totalpages}{#1}%
+  \renewcommand{\totaltables}{#2}%
+  \renewcommand{\totalfigures}{#3}%
+  \renewcommand{\totalalgorithms}{#4}%
+  \renewcommand{\totallistings}{#5}%
+  \renewcommand{\totalannexes}{#6}%
+  \renewcommand{\totalreferences}{#7}%
 }
 
 % English scope line
 \newcommand{\thesisscopeEN}{%
-  The Bachelor Paper is written in \textbf{\ref{TotPages}} pages and contains
-  \textbf{\TotalOrZero{table}} tables,
-  \textbf{\TotalOrZero{figure}} figures,
-  \textbf{\TotalOrZero{algorithm}} algorithms,
-  \textbf{\TotalOrZero{lstlisting}} listings,
-  \textbf{\TotalOrZero{annex}} annexes, and a list of references with
-  \textbf{\TotalOrZero{refcount}} sources.
+  The Bachelor Paper is written in \textbf{\totalpages} pages and contains
+  \textbf{\totaltables} tables,
+  \textbf{\totalfigures} figures,
+  \textbf{\totalalgorithms} algorithms,
+  \textbf{\totallistings} listings,
+  \textbf{\totalannexes} annexes, and a list of references with
+  \textbf{\totalreferences} sources.
 }
 
 % Latvian scope line
 \newcommand{\thesisscopeLV}{%
-  Bakalaura darbs izstrādāts \textbf{\ref{TotPages}} lapaspusēs un ietver
-  \textbf{\TotalOrZero{table}} tabulas,
-  \textbf{\TotalOrZero{figure}} attēlus,
-  \textbf{\TotalOrZero{algorithm}} algoritmus,
-  \textbf{\TotalOrZero{lstlisting}} programmu kodu izdrukas (listings),
-  \textbf{\TotalOrZero{annex}} pielikumus, kā arī literatūras sarakstu ar
-  \textbf{\TotalOrZero{refcount}} avotiem.
+  Bakalaura darbs izstrādāts \textbf{\totalpages} lapaspusēs un ietver
+  \textbf{\totaltables} tabulas,
+  \textbf{\totalfigures} attēlus,
+  \textbf{\totalalgorithms} algoritmus,
+  \textbf{\totallistings} programmu kodu izdrukas (listings),
+  \textbf{\totalannexes} pielikumus, kā arī literatūras sarakstu ar
+  \textbf{\totalreferences} avotiem.
 }
 
-% Register standard float counters for totals and set up captions
+% Set up captions at begin document
 \AtBeginDocument{%
-  \regtotcounter{figure}%
-  \regtotcounter{table}%
-  \regtotcounter{algorithm}%
-  \regtotcounter{lstlisting}%
-  \regtotcounter{annex}%
-  \regtotcounter{refcount}%
-
   % Figures: caption below, centered
   \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
 
