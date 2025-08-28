@@ -7,7 +7,21 @@
 \usepackage{algpseudocode}
 
 % % --- Code listings with minted (creates a 'listing' float)
-\usepackage[newfloat]{minted} % compile with -shell-escape
+% \usepackage[newfloat]{minted} % compile with -shell-escape
+% --- Code listings without external deps
+\usepackage{listings}
+\lstset{
+  basicstyle=\ttfamily\small,
+  numbers=left,
+  numbersep=6pt,
+  frame=single,
+  breaklines=true,
+  tabsize=2,
+  float=htbp, % keep if you want floaty listings
+  captionpos=t % caption on top (to match your template)
+}
+% Optional: pick a mono font explicitly
+% \setmonofont{Mono} % or Consolas/DejaVu Sans Mono/etc.
 
 
 % --- Bibliography via biblatex ---
@@ -16,7 +30,7 @@
 
 % ====== Fill these in (example placeholders) ======
 \setthesisinfoLV
-  {Darbinieku motivācijas sistēmas pilnveide uzņēmumā X}% LV Title
+  {<BSC DARBA NOSAUKUMS ŠEIT>}% LV Title
   {Vārds Uzvārds}% LV Student
   {Dr. Prof. Vadītāja Vārds Uzvārds, PhD}% LV Supervisor
   {42484 Informācijas sistēmas (bak.)}% LV Study programme
@@ -24,7 +38,7 @@
   {2025}% Year
 
 \setthesisinfoEN
-  {Improvement of Employee Motivation System at Enterprise X}% EN Title
+  {<BSC THESIS TITLE GOES HERE>}% EN Title
   {Name Surname}% EN Student
   {Dr. Prof. Supervisor Name Surname, PhD}% EN Supervisor
   {42484 Information Systems (BSc)}% EN Study programme
@@ -34,7 +48,9 @@
 \begin{document}
 
 \input{a_frontmatter/title_page_lv}
+\clearpage
 \input{a_frontmatter/title_page_en}
+\clearpage
 
 % Page numbering starts at Title page but number not printed there (done).
 % Show numbers from here:
@@ -59,7 +75,8 @@
 \begingroup\let\addcontentsline\relax\listofalgorithms\endgroup
 
 \clearpage
-\begingroup\let\addcontentsline\relax\listoflistings\endgroup
+% \begingroup\let\addcontentsline\relax\listoflistings\endgroup
+\begingroup\let\addcontentsline\relax\lstlistoflistings\endgroup
 \clearpage
 
 

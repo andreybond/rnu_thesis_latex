@@ -13,6 +13,8 @@
 *.lof
 *.lol
 *.lot
+*.pyg
+*.bbl-SAVE-ERROR
 
 # Editor-specific files
 .vscode/

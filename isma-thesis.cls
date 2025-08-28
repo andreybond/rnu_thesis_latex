@@ -56,8 +56,16 @@
 \RequirePackage{graphicx}
 \graphicspath{{chapters/chapter1/assets/}{frontmatter/assets/}}
 
+
+\RequirePackage{listings}
+
 \RequirePackage{caption}
 \RequirePackage{ragged2e} % for \RaggedLeft (better ragged-left = flush-right)
+
+% ===== Totals & counts =====
+\RequirePackage{totpages}  % provides \ref{TotPages}
+\RequirePackage{totcount}  % totals of counters across doc runs
+\RequirePackage{etoolbox}
 
 % Global defaults
 \captionsetup{
@@ -67,20 +75,20 @@
   skip=6pt
 }
 
-% Per-type rules (apply after all packages are loaded)
-\AtBeginDocument{%
-  % Figures: caption below, centered
-  \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
+% % Per-type rules (apply after all packages are loaded)
+% \AtBeginDocument{%
+%   % Figures: caption below, centered
+%   \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
 
-  % Tables: caption above, RIGHT-justified
-  \captionsetup[table]{position=top, justification=RaggedLeft, singlelinecheck=false}
+%   % Tables: caption above, RIGHT-justified
+%   \captionsetup[table]{position=top, justification=RaggedLeft, singlelinecheck=false}
 
-  % Algorithms: caption above (default alignment is fine)
-  \captionsetup[algorithm]{position=top}
+%   % Algorithms: caption above (default alignment is fine)
+%   \captionsetup[algorithm]{position=top}
 
-  % Listings (minted[newfloat]): caption above, RIGHT-justified
-  \captionsetup[listing]{position=top, justification=RaggedLeft, singlelinecheck=false}
-}
+%   % Listings (minted[newfloat]): caption above, RIGHT-justified
+%   \captionsetup[listing]{position=top, justification=RaggedLeft, singlelinecheck=false}
+% }
 
 % Source line for figures (use before \caption inside a figure)
 \newcommand{\figsource}[1]{%
@@ -91,8 +99,66 @@
 
 
 
-% Per-type tweaks (use AtBeginDocument so types from external pkgs exist)
+% Annex counter: counts \chapter after \appendix
+\newcounter{annex}
+\newif\ifinappendix
+\inappendixfalse
+
+\pretocmd{\appendix}{\inappendixtrue\setcounter{annex}{0}}{}{}
+% increment annex at each chapter once in appendix
+\pretocmd{\chapter}{\ifinappendix\stepcounter{annex}\fi}{}{}
+
+% Count printed bibliography entries with biblatex
+\newcounter{refcount}
+
+% Safe getters with fallback to 0 on the first run
+\newcommand{\TotalOrZero}[1]{%
+  \ifcsname c@#1\endcsname%
+    \total{#1}%
+  \else%
+    0%
+  \fi%
+}
+
+% Hook for biblatex if it's loaded
 \AtBeginDocument{%
+  \@ifpackageloaded{biblatex}{%
+    % This runs for every entry that actually gets printed
+    \AtEveryBibitem{\stepcounter{refcount}}%
+  }{}%
+}
+
+% English scope line
+\newcommand{\thesisscopeEN}{%
+  The Bachelor Paper is written in \textbf{\ref{TotPages}} pages and contains
+  \textbf{\TotalOrZero{table}} tables,
+  \textbf{\TotalOrZero{figure}} figures,
+  \textbf{\TotalOrZero{algorithm}} algorithms,
+  \textbf{\TotalOrZero{lstlisting}} listings,
+  \textbf{\TotalOrZero{annex}} annexes, and a list of references with
+  \textbf{\TotalOrZero{refcount}} sources.
+}
+
+% Latvian scope line
+\newcommand{\thesisscopeLV}{%
+  Bakalaura darbs izstrādāts \textbf{\ref{TotPages}} lapaspusēs un ietver
+  \textbf{\TotalOrZero{table}} tabulas,
+  \textbf{\TotalOrZero{figure}} attēlus,
+  \textbf{\TotalOrZero{algorithm}} algoritmus,
+  \textbf{\TotalOrZero{lstlisting}} programmu kodu izdrukas (listings),
+  \textbf{\TotalOrZero{annex}} pielikumus, kā arī literatūras sarakstu ar
+  \textbf{\TotalOrZero{refcount}} avotiem.
+}
+
+% Register standard float counters for totals and set up captions
+\AtBeginDocument{%
+  \regtotcounter{figure}%
+  \regtotcounter{table}%
+  \regtotcounter{algorithm}%
+  \regtotcounter{lstlisting}%
+  \regtotcounter{annex}%
+  \regtotcounter{refcount}%
+
   % Figures: caption below, centered
   \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
 
@@ -103,9 +169,9 @@
   \captionsetup[algorithm]{position=top, justification=raggedright,
                            singlelinecheck=false, name=Algorithm}
 
-  % Listings (minted[newfloat]): caption above, ragged-right, name "Listing"
-  \captionsetup[listing]{position=top, justification=raggedright,
-                         singlelinecheck=false, name=Listing}
+  % Listings (listings.sty): caption above, ragged-right, name "Listing"
+  \captionsetup[lstlisting]{position=top, justification=raggedright,
+                            singlelinecheck=false, name=Listing}
 }
 
 % Number algorithms/listings within chapters (Algorithm 2.1, Listing 3.2)
@@ -113,7 +179,8 @@
 \RequirePackage{chngcntr}
 \makeatletter
 \@ifundefined{c@algorithm}{}{ \counterwithin{algorithm}{chapter} }
-\@ifundefined{c@listing}{}{  \counterwithin{listing}{chapter}  }
+% \@ifundefined{c@listing}{}{  \counterwithin{listing}{chapter}  }
+\@ifundefined{c@lstlisting}{}{ \counterwithin{lstlisting}{chapter} }
 \makeatother
 
 
