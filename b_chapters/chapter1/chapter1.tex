@@ -1,45 +1,115 @@
-\chapter{Theoretical approaches to the study of employee motivation}
-\section{Concept of employee motivation}
-Provide definitions and literature review; end with brief sub-conclusions.
+\chapter{Literature Review and Theoretical Background}
+\label{chap:litreview}
 
-\section{Basic theories of employee motivation}
-Compare classic and contemporary theories; outline implications.
+% --- Purpose (short instructional paragraph for students) ---
+% This chapter introduces key concepts/definitions, surveys related work,
+% and presents the theoretical framework that underpins the thesis.
+% Keep it focused: define terms, compare sources, and end with a brief synthesis.
 
-\section{System approach to employee motivation}
-\subsection{Principles of employee motivation}
-\subsection{Types of employee motivation}
+\section{Core Concepts and Definitions}
+\label{sec:concepts}
+Briefly introduce the core terms and definitions your thesis relies on. Use primary/authoritative sources and cite them properly, e.g., \cite{porter2008}. When you use a term for the first time, define it clearly and consistently.
 
-\noindent\textbf{Conclusions (for Chapter 1).} Brief paragraph summarizing the main theoretical takeaways.
+Inline emphasis works as expected: \emph{italics} and \textbf{bold}. Use \verb|\enquote{...}| (from \texttt{csquotes}) for proper quotation marks: \enquote{quoted text}. URLs should be clickable with \verb|\url{...}|, e.g., \url{https://ctan.org}.
 
-% ---- Figure example (title under figure; centered) ----
+\paragraph{Tip (citations).}
+With \texttt{biblatex} (IEEE style here), the basic numeric citation is \verb|\cite{...}|. Place citations after punctuation when they refer to a whole sentence.\footnote{Footnotes are fine for clarifications, not for core claims.}
+
+\section{Related Work: Structure and Comparison}
+\label{sec:related}
+Organize related work by themes, methods, or chronology. Summarize each strand and compare differences/restrictions. You can use lists to keep comparisons readable:
+
+\begin{itemize}[leftmargin=1.2cm]
+  \item \textbf{Approach A} — strengths, limitations, and where it applies \cite{friedman2006}.
+  \item \textbf{Approach B} — contrast with A; mention datasets, measures \cite{laudon2015}.
+  \item \textbf{Approach C} — hybrid or recent trend; open issues \cite{schmidt2014}.
+\end{itemize}
+
+When you need to point the reader to figures, tables, algorithms, or listings, always use labels and \verb|\cref|:
+see \cref{fig:example-figure,tab:example-table,alg:example, lst:bubble}.
+
+% ---- Figure example (title under figure; centered by class) ----
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.7\linewidth]{b_chapters/chapter1/assets/isma_logo.png}
-  \figsource{Authors’ created image}
-  \caption{Example grouped illustration of motivation drivers - some dummy caption}
-  \label{fig:motivation-drivers}
+  \figsource{Author-created illustration (replace with your own figure and source).}
+  \caption{Example figure: visualizing a conceptual taxonomy (replace).}
+  \label{fig:example-figure}
 \end{figure}
 
-% ---- Table example (title above; single spacing) ----
+% ---- Table example (title above; ragged-right by class) ----
 {\singlespacing
 \begin{table}[h]
-  \caption{Research results (example dummy caption)}
-  \label{tab:research-results}
+  \caption{Example comparison table (replace with your synthesis)}
+  \label{tab:example-table}
   \centering
-  \begin{tabular}{lrrrr}
+  \begin{tabular}{lrrr}
     \toprule
-    Factor & A & B & C & D\\
+    Criterion            & Method A & Method B & Method C\\
     \midrule
-    Pay & 2 & 23 & 23 & 3\\
-    Recognition & 4 & 18 & 19 & 2\\
-    Growth & 5 & 21 & 16 & 4\\
+    Accuracy (avg)       & 0.82     & 0.79     & 0.84\\
+    Cost (relative)      & High     & Medium   & Low\\
+    Data requirement     & Large    & Medium   & Small\\
     \bottomrule
   \end{tabular}
 
   \vspace{2mm}
-  \emph{Source:} author’s calculation based on data from Enterprise X.
-
-
-  Example of citation \cite{porter2008}.
+  \emph{Note:} Replace numbers with your findings; report units and sources.
 \end{table}
 }
+
+\section{Theoretical Framework}
+\label{sec:theory}
+State the theory or model that grounds your work. Formally define variables and relations when appropriate. Use numbered equations for important results:
+
+\begin{align}
+  \label{eq:objective}
+  J(\theta) &= \mathbb{E}_{x \sim \mathcal{D}} \bigl[\, \ell(f_\theta(x),\, y)\, \bigr]
+\end{align}
+
+Reference equations with \verb|\cref|, e.g., the objective in \cref{eq:objective}. Keep derivations concise and push long proofs to an appendix if needed.
+
+% ---- Algorithm (float + pseudocode) example ----
+\begin{algorithm}[h]
+\caption{Generic greedy selection (template — adapt to your context)}
+\begin{algorithmic}[1]
+  \State Initialize solution $S \gets \emptyset$
+  \While{a feasible choice exists}
+    \State choose the best feasible item $x$ according to criterion $C$
+    \State $S \gets S \cup \{x\}$
+  \EndWhile
+  \State \Return $S$
+\end{algorithmic}
+\label{alg:example}
+\end{algorithm}
+
+\section{Illustrative Code Snippet (if applicable)}
+\label{sec:listings}
+For reproducibility, small, focused code excerpts can clarify ideas. Use the \texttt{listings} environment; keep captions short and descriptive.
+
+\begin{lstlisting}[language=Python,caption={Example function signature for data transform},label={lst:bubble},float=htbp]
+def transform(records: list[dict]) -> list[dict]:
+    """Validate and normalize input records.
+    Replace with your own code; keep examples minimal and clear.
+    """
+    out = []
+    for r in records:
+        if "id" not in r:  # simple guard
+            continue
+        r = {k.strip().lower(): v for k, v in r.items()}
+        out.append(r)
+    return out
+\end{lstlisting}
+
+Reference listings with \verb|\cref{lst:bubble}|. If you need more advanced syntax highlighting, consider \texttt{minted} (already disabled in this template to avoid external deps).
+
+\section{Chapter Summary}
+\label{sec:summary}
+End with a short synthesis that links
+(1) definitions and concepts (\cref{sec:concepts}),
+(2) gaps and comparisons in related work (\cref{sec:related}),
+and (3) the theoretical lens you will apply (\cref{sec:theory}).
+This summary should directly motivate the next chapter’s objectives and methods.
+
+\noindent\textbf{Conclusions (for Chapter~1).}
+Write a brief paragraph that: (i) states the scope of the literature you covered, (ii) highlights key gaps/opportunities your work addresses, and (iii) justifies the chosen theoretical framework and its relevance to your research aim.

@@ -62,6 +62,35 @@
 \RequirePackage{caption}
 \RequirePackage{ragged2e} % for \RaggedLeft (better ragged-left = flush-right)
 
+
+\RequirePackage{etoolbox} % harmless if already loaded
+\AtBeginEnvironment{lstlisting}{\captionsetup{type=lstlisting}}
+
+% ---- Core math and linking ----
+\RequirePackage{amsmath,amssymb,mathtools}
+\numberwithin{equation}{chapter}
+
+\RequirePackage{xcolor}          % needed by many listings examples
+\RequirePackage[hidelinks]{hyperref}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+
+% ---- Figures/tables helpers used in Appendix A ----
+\RequirePackage{subcaption}      % for subfigures
+\RequirePackage{longtable}       % multi-page tables
+\RequirePackage{pdflscape}       % landscape pages
+
+% ---- TikZ and (optional) pgfplots if available ----
+\RequirePackage{tikz}
+\IfFileExists{pgfplots.sty}{%
+  \RequirePackage{pgfplots}
+  \pgfplotsset{compat=1.18}
+}{}
+
+% ---- Optional: nicer enum lists used in demos ----
+\RequirePackage{enumitem}
+
+\RequirePackage{csquotes}
+
 % ===== Manual placeholders for thesis scope =====
 % Users should manually set these values by counting their content
 \newcommand{\totalpages}{XX}        % Total pages - set manually
@@ -80,28 +109,18 @@
   skip=6pt
 }
 
-% % Per-type rules (apply after all packages are loaded)
-% \AtBeginDocument{%
-%   % Figures: caption below, centered
-%   \captionsetup[figure]{position=bottom, justification=centering, singlelinecheck=false}
-
-%   % Tables: caption above, RIGHT-justified
-%   \captionsetup[table]{position=top, justification=RaggedLeft, singlelinecheck=false}
-
-%   % Algorithms: caption above (default alignment is fine)
-%   \captionsetup[algorithm]{position=top}
-
-%   % Listings (minted[newfloat]): caption above, RIGHT-justified
-%   \captionsetup[listing]{position=top, justification=RaggedLeft, singlelinecheck=false}
-% }
+% ---- Make listings captions robust with caption package ----
+\makeatletter
+\providecommand*\lstlistingname{Listing}          % singular
+\providecommand*\lstlistlistingname{List of Listings} % list title
+\providecommand*\fname@lstlisting{\lstlistingname}    % full-name hook used by caption
+\makeatother
 
 % Source line for figures (use before \caption inside a figure)
 \newcommand{\figsource}[1]{%
   \captionsetup{type=figure}%
   \caption*{\emph{Source: #1}}%
 }
-
-
 
 
 % Commands to set the manual values (users should call these in main.tex)
@@ -136,6 +155,23 @@
   \textbf{\totalannexes} pielikumus, kā arī literatūras sarakstu ar
   \textbf{\totalreferences} avotiem.
 }
+
+
+% --- Teach 'caption' about listings (works for float & non-float)
+\makeatletter
+\providecommand*\lstlistingname{Listing}
+\providecommand*\lstlistlistingname{List of Listings}
+\@ifundefined{fname@lstlisting}{%
+  \expandafter\newcommand\csname fname@lstlisting\endcsname{\lstlistingname}%
+}{}
+\makeatother
+
+% Optional but harmless: set default caption style for listings
+\captionsetup[lstlisting]{position=top, justification=raggedright,
+                          singlelinecheck=false, name=\lstlistingname}
+
+
+
 
 % Set up captions at begin document
 \AtBeginDocument{%

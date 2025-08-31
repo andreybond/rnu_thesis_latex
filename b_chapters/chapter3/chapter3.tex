@@ -7,26 +7,14 @@ Survey design, sample, instruments, findings; gaps.
 
 Example of how algorithm will look like:
 
-\begin{table}[h]
-\captionsetup{type=lstlisting}
-\caption{Bubble sort in Python (dummy caption)}
-\begin{tabular}{|p{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth}|}
-\hline
-\begin{minipage}[t]{\dimexpr\textwidth-2\tabcolsep-2\arrayrulewidth-1em}
-\vspace{0.5em}
-\ttfamily
-\noindent def bubble(a):\\
-\hspace*{1em}n = len(a)\\
-\hspace*{1em}for i in range(n-1):\\
-\hspace*{2em}for j in range(n-1-i):\\
-\hspace*{3em}if a[j] > a[j+1]:\\
-\hspace*{4em}a[j], a[j+1] = a[j+1], a[j]\\
-\vspace{0.5em}
-\end{minipage}\\
-\hline
-\end{tabular}
-\label{lst:bubble}
-\end{table}
+\begin{lstlisting}[language=Python,caption={Bubble sort in Python},label={lst:bubble},float=htbp]
+def bubble(a):
+    n = len(a)
+    for i in range(n-1):
+        for j in range(n-1-i):
+            if a[j] > a[j+1]:
+                a[j], a[j+1] = a[j+1], a[j]
+\end{lstlisting}
 
 
 \noindent\textbf{Conclusions (for Chapter 3).} Key insights about deficiencies and opportunities.
