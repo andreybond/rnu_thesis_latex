@@ -1,49 +1,93 @@
 \chapter{Case / System Analysis (Example Chapter~2)}
 \label{chap:analysis}
 
-% --- Guidelines for students ---
-% The Bachelor thesis usually consists of 2–3 main chapters,
-% but the exact structure is flexible.
-% Use your judgement:
-% - If two chapters are too short (<4–5 pages), consider merging them.
-% - If a single chapter grows too large (>20–25 pages), consider splitting it.
-% The goal is balance and readability, not a fixed number.
+% --- IMPORTANT NOTE FOR STUDENTS ---
+% This is only a suggested structure and sample content.
+% You are free to modify, reorder, merge, or rename sections
+% if it makes sense for your topic — as long as your supervisor agrees.
 
-\section{General Characteristics of the Object / Case}
-Provide a concise description of the object of study (enterprise, dataset, system, community, etc.). Explain context, history, ownership, or design aspects that are relevant for your research.
+This chapter often provides a structured analysis of the case, dataset, or system that your thesis investigates.  
+However, its scope and layout depend heavily on the chosen topic. Some theses merge this part into the empirical chapter; others expand it into multiple chapters.  
+Think of the following sections as \emph{examples}, not as mandatory rules.
 
-\section{Analysis of Internal and External Environment}
-Use appropriate analytical frameworks (examples: SWOT, PEST, Five Forces, system diagrams, benchmarking). Present the logic of your analysis step by step.
+\section{General Characteristics of the Case / System (Example Section)}
+\label{sec:case}
+Here you may describe the case or system under study (e.g., an IT application, dataset, algorithm, protocol, or infrastructure).  
+Mention background, design, stakeholders, or technical architecture.  
 
-% --- Example figure (replace with real content) ---
+\paragraph{Note.} Adapt the level of detail to your project.  
+If your work is purely theoretical, this section can be shorter. If it is applied to a concrete system or dataset, give enough context so the reader understands what is being studied.
+
+\section{Analysis of Internal and External Environment (Optional Example)}
+\label{sec:env}
+Depending on your topic, you might include a structured breakdown of the system.  
+Possible angles include (choose those that fit, or invent your own):
+
+\begin{itemize}[leftmargin=1.2cm]
+  \item \textbf{Architecture.} Components, modules, services, or data pipelines.
+  \item \textbf{Performance.} Scalability, latency, throughput, bottlenecks.
+  \item \textbf{Security and reliability.} Threats, vulnerabilities, resilience.
+  \item \textbf{External factors.} Standards, APIs, dependencies, regulations.
+\end{itemize}
+
+Support your analysis with diagrams, tables, or references if relevant.
+
+% --- Example figure (replace or remove) ---
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.65\linewidth]{b_chapters/chapter1/assets/isma_logo.png}
-  \figsource{Replace with your own diagram/model.}
-  \caption{Example analytical framework diagram.}
-  \label{fig:analysis-framework}
+  \figsource{Replace with your own system diagram (if needed).}
+  \caption{Example system architecture diagram.}
+  \label{fig:analysis-example}
 \end{figure}
 
-\section{Data and Methods Used for the Analysis}
-Briefly explain what data you are using here (statistics, survey, system logs, documents, etc.). Indicate how the data was collected, and what methods you are applying (e.g., descriptive statistics, content analysis, modelling).
-
-% --- Example table (replace with real data) ---
+% --- Example table (replace or remove) ---
 {\singlespacing
 \begin{table}[h]
-  \caption{Example analysis results (dummy data)}
-  \label{tab:analysis-results}
+  \caption{Example system metrics (dummy data)}
+  \label{tab:analysis-example}
   \centering
   \begin{tabular}{lrr}
     \toprule
-    Indicator & Value A & Value B\\
+    Metric & Baseline value & Target value \\
     \midrule
-    Sample size         & 120 & -- \\
-    Turnover rate (\%)  & 14.2 & 11.3\\
-    Satisfaction index  & 3.8 & 4.2\\
+    Response time (ms)  & 240   & 120   \\
+    Uptime (\%)         & 97.5  & 99.9  \\
+    Requests / second   & 350   & 1000  \\
     \bottomrule
   \end{tabular}
 \end{table}
 }
 
+\section{Context, Constraints, and Risks (Optional)}
+\label{sec:constraints}
+In some topics, it is useful to state the limitations and boundary conditions that affect your system. Examples:
+
+\begin{itemize}[leftmargin=1.2cm]
+  \item Technical constraints (hardware, data availability, standards compliance).
+  \item Research constraints (time, scope, access rights).
+  \item Risks (privacy, security, reliability, scalability challenges).
+\end{itemize}
+
+This subsection can be skipped if not relevant.
+
+\section{Data and Methods for the Analysis (Example)}
+\label{sec:datamethods}
+Briefly outline what data and methods you are using here.  
+Examples: logs, benchmark datasets, architectural specifications, monitoring tools.  
+Methods could include profiling, simulation, descriptive statistics, or qualitative inspection.  
+Adapt this to your project; the goal is only to show that your analysis has a methodological basis.
+
 \section{Sub-Conclusions (for Chapter~2)}
-End this chapter with a short subsection that summarizes the main analytical insights. Keep it focused: 1–2 paragraphs that motivate the next (empirical or practical) chapter.
+\label{sec:subconcl}
+End with a short synthesis (typically 1–3 paragraphs).  
+Example points to cover:
+
+\begin{itemize}[leftmargin=1.2cm]
+  \item What the analysis revealed (main technical insights).
+  \item Which constraints/risks are most critical for your research.
+  \item How this motivates the next step (empirical study in Chapter~\ref{chap:empirical}).
+\end{itemize}
+
+\paragraph{Reminder.} This subsection is not meant to repeat the whole chapter — just connect the dots and prepare for the next one.
+

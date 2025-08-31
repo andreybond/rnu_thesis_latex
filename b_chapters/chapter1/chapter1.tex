@@ -1,46 +1,44 @@
 \chapter{Literature Review and Theoretical Background}
 \label{chap:litreview}
 
-% --- Purpose (short instructional paragraph for students) ---
-% This chapter introduces key concepts/definitions, surveys related work,
-% and presents the theoretical framework that underpins the thesis.
-% Keep it focused: define terms, compare sources, and end with a brief synthesis.
+% --- Purpose (for students) ---
+% This chapter defines key concepts, surveys related work, and sets the theoretical lens.
+% It must end by motivating the research direction and articulating the concrete gap your thesis fills.
 
 \section{Core Concepts and Definitions}
 \label{sec:concepts}
-Briefly introduce the core terms and definitions your thesis relies on. Use primary/authoritative sources and cite them properly, e.g., \cite{porter2008}. When you use a term for the first time, define it clearly and consistently.
+Introduce the foundational terms your thesis relies on using authoritative sources, e.g., \cite{porter2008,laudon2015}. Define each term exactly once and use it consistently throughout the thesis. Prefer primary definitions where possible; when multiple definitions exist, present the variants and justify your chosen convention.
 
-Inline emphasis works as expected: \emph{italics} and \textbf{bold}. Use \verb|\enquote{...}| (from \texttt{csquotes}) for proper quotation marks: \enquote{quoted text}. URLs should be clickable with \verb|\url{...}|, e.g., \url{https://ctan.org}.
+Inline emphasis: \emph{italics}, \textbf{bold}. Use \verb|\enquote{...}| (from \texttt{csquotes}) for quotations, e.g., \enquote{quoted text}. Use \verb|\url{...}| for clickable links such as \url{https://ctan.org}.
 
-\paragraph{Tip (citations).}
-With \texttt{biblatex} (IEEE style here), the basic numeric citation is \verb|\cite{...}|. Place citations after punctuation when they refer to a whole sentence.\footnote{Footnotes are fine for clarifications, not for core claims.}
+\paragraph{Citation tip.}
+With \texttt{biblatex} (IEEE style in this project), numeric citations use \verb|\cite{...}|.\footnote{Place the citation after punctuation when it references a full sentence.} Group multiple sources as needed, e.g., \cite{friedman2006,schmidt2014}.
 
-\section{Related Work: Structure and Comparison}
+\section{Related Work: Themes, Methods, and Evidence}
 \label{sec:related}
-Organize related work by themes, methods, or chronology. Summarize each strand and compare differences/restrictions. You can use lists to keep comparisons readable:
+Organize prior work by coherent themes (theory, methods, application domains) or chronology. For each theme, summarize the central idea, typical assumptions, evaluation protocols, and reported limitations. Contrast strands rather than listing them.
 
 \begin{itemize}[leftmargin=1.2cm]
-  \item \textbf{Approach A} — strengths, limitations, and where it applies \cite{friedman2006}.
-  \item \textbf{Approach B} — contrast with A; mention datasets, measures \cite{laudon2015}.
-  \item \textbf{Approach C} — hybrid or recent trend; open issues \cite{schmidt2014}.
+  \item \textbf{Approach A (theory-driven).} Outline core mechanisms, typical datasets, and where this approach excels; note constraints or external validity issues \cite{friedman2006}.
+  \item \textbf{Approach B (data-driven/practice-oriented).} Contrast assumptions and deployment costs with Approach A; highlight reproducibility and measurement issues \cite{laudon2015}.
+  \item \textbf{Approach C (hybrid/emerging).} Summarize integration points and remaining open problems \cite{schmidt2014}.
 \end{itemize}
 
-When you need to point the reader to figures, tables, algorithms, or listings, always use labels and \verb|\cref|:
-see \cref{fig:example-figure,tab:example-table,alg:example, lst:bubble}.
+When referring to figures, tables, algorithms, or listings, always use labels + \verb|\cref| (e.g., \cref{fig:example-figure,tab:example-table,alg:example,lst:snippet}).
 
-% ---- Figure example (title under figure; centered by class) ----
+% ---- Figure example (caption under figure; centered by class) ----
 \begin{figure}[h]
   \centering
   \includegraphics[width=0.7\linewidth]{b_chapters/chapter1/assets/isma_logo.png}
   \figsource{Author-created illustration (replace with your own figure and source).}
-  \caption{Example figure: visualizing a conceptual taxonomy (replace).}
+  \caption{Example figure: a conceptual taxonomy (replace with your content).}
   \label{fig:example-figure}
 \end{figure}
 
-% ---- Table example (title above; ragged-right by class) ----
+% ---- Table example (caption above; ragged-right by class) ----
 {\singlespacing
 \begin{table}[h]
-  \caption{Example comparison table (replace with your synthesis)}
+  \caption{Comparison matrix (replace with your synthesis)}
   \label{tab:example-table}
   \centering
   \begin{tabular}{lrrr}
@@ -54,20 +52,20 @@ see \cref{fig:example-figure,tab:example-table,alg:example, lst:bubble}.
   \end{tabular}
 
   \vspace{2mm}
-  \emph{Note:} Replace numbers with your findings; report units and sources.
+  \emph{Note:} Replace placeholders with your evidence; include units and sources.
 \end{table}
 }
 
 \section{Theoretical Framework}
 \label{sec:theory}
-State the theory or model that grounds your work. Formally define variables and relations when appropriate. Use numbered equations for important results:
+State the theoretical lens or formal model that grounds your work. Define variables and relationships precisely, and connect assumptions to the context of your thesis. Keep derivations concise; move long proofs to an appendix.
 
 \begin{align}
   \label{eq:objective}
-  J(\theta) &= \mathbb{E}_{x \sim \mathcal{D}} \bigl[\, \ell(f_\theta(x),\, y)\, \bigr]
+  J(\theta) &= \mathbb{E}_{(x,y)\sim \mathcal{D}} \bigl[\, \ell(f_\theta(x),\, y)\, \bigr] \, ,
 \end{align}
 
-Reference equations with \verb|\cref|, e.g., the objective in \cref{eq:objective}. Keep derivations concise and push long proofs to an appendix if needed.
+where $\ell$ is the loss aligned to your evaluation criterion and $f_\theta$ the model or rule under study. Reference important equations with \verb|\cref|, e.g., \cref{eq:objective}.
 
 % ---- Algorithm (float + pseudocode) example ----
 \begin{algorithm}[h]
@@ -85,31 +83,41 @@ Reference equations with \verb|\cref|, e.g., the objective in \cref{eq:objective
 
 \section{Illustrative Code Snippet (if applicable)}
 \label{sec:listings}
-For reproducibility, small, focused code excerpts can clarify ideas. Use the \texttt{listings} environment; keep captions short and descriptive.
+Include small, focused excerpts that clarify core ideas or reproducibility steps. Keep captions short and descriptive.
 
-\begin{lstlisting}[language=Python,caption={Example function signature for data transform},label={lst:bubble},float=htbp]
+\begin{lstlisting}[language=Python,caption={Example function signature for a data transform},label={lst:snippet},float=htbp]
 def transform(records: list[dict]) -> list[dict]:
-    """Validate and normalize input records.
-    Replace with your own code; keep examples minimal and clear.
-    """
+    """Validate and normalize input records (example)."""
     out = []
     for r in records:
-        if "id" not in r:  # simple guard
+        if "id" not in r:
             continue
         r = {k.strip().lower(): v for k, v in r.items()}
         out.append(r)
     return out
 \end{lstlisting}
 
-Reference listings with \verb|\cref{lst:bubble}|. If you need more advanced syntax highlighting, consider \texttt{minted} (already disabled in this template to avoid external deps).
+Reference listings with \cref{lst:snippet}. If advanced highlighting is required, consider \texttt{minted} (not enabled in this template by default to avoid external dependencies).
+
+\section{Research Motivation and Direction}
+\label{sec:motivation}
+\textbf{Purpose.} This subsection translates the state of the art (\cref{sec:related}) and the theoretical lens (\cref{sec:theory}) into a concrete research direction that is both \emph{necessary} (gap) and \emph{actionable} (methods and data you will actually use).
+
+\paragraph{Problem significance.}
+Briefly argue why the problem matters (scientific or practical). Identify stakeholders and decision contexts affected by your results.
+
+\paragraph{Identified gap.}
+From the comparison in \cref{sec:related}, distill the unmet need (e.g., missing evaluation setting, scalability constraint, domain misfit, weak external validity). Define the gap in one or two sentences that are testable or measurable.
+
+\paragraph{Direction and scope.}
+State the research direction you will pursue to address the gap, together with scope boundaries (what is deliberately out of scope). Link this direction to the thesis \emph{Aim} and \emph{Tasks} defined in the Introduction and to the task→chapter mapping (see Table in the Introduction).
+
+\paragraph{Success criteria.}
+Name the primary evaluation criteria (metrics or qualitative outcomes) that will determine whether the approach succeeds in your empirical chapter.
 
 \section{Chapter Summary}
 \label{sec:summary}
-End with a short synthesis that links
-(1) definitions and concepts (\cref{sec:concepts}),
-(2) gaps and comparisons in related work (\cref{sec:related}),
-and (3) the theoretical lens you will apply (\cref{sec:theory}).
-This summary should directly motivate the next chapter’s objectives and methods.
+This chapter (i) fixed key concepts (\cref{sec:concepts}), (ii) compared approaches and exposed a concrete gap (\cref{sec:related}), and (iii) established the theoretical lens (\cref{sec:theory}). The \textbf{Research Motivation and Direction} (\cref{sec:motivation}) specifies how the thesis will address that gap, setting up the next chapter’s analysis of the case/system.
 
 \noindent\textbf{Conclusions (for Chapter~1).}
-Write a brief paragraph that: (i) states the scope of the literature you covered, (ii) highlights key gaps/opportunities your work addresses, and (iii) justifies the chosen theoretical framework and its relevance to your research aim.
+We defined the conceptual vocabulary, contrasted major approaches with evidence, and selected a theory consistent with the problem setting. A concrete gap has been articulated together with success criteria and scope. These choices motivate the analysis in Chapter~\ref{chap:analysis} and the empirical design in Chapter~\ref{chap:empirical}.
