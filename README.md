@@ -2,182 +2,224 @@
 
 This template implements the key layout and styling rules from the provided ISMA guidelines (A4, 12pt, Times New Roman/Calibri, 1.5 line spacing, mirrored margins, outer page numbers, table/figure caption placement, chapter-based numbering, and an alphabetized bibliography).
 
-Detailed LaTeX documentation can be found at \url{https://www.latex-project.org/help/documentation/}
+Detailed LaTeX documentation can be found at [latex-project.org](https://www.latex-project.org/help/documentation/)
 
-## Installation
+---
 
-To use this thesis template on Linux systems, you'll need to install XeLaTeX and additional packages:
+## 🎯 Workflow Overview for Students
 
-### Ubuntu/Debian-based distributions
+When your **BSc thesis topic** is approved by your supervisor and officially submitted, you are required to:
+
+1. **Create a GitHub account** (if you do not already have one).  
+   - [Sign up here](https://github.com/join).  
+
+2. **Clone this repository** (the official ISMA thesis template) to your own private GitHub repository.  
+   - This will ensure your thesis work is version-controlled and progress is visible.  
+
+3. **Set up LaTeX** on your computer (see installation instructions below).  
+
+4. **Work with the template**:  
+   - Edit the `.tex` files to reflect your own thesis contents.  
+   - Keep the structure, formatting, and guidelines intact unless your supervisor specifies changes.  
+
+5. **Commit and push changes at least every two weeks**.  
+   - This is **mandatory**. Failure to do so will mean your thesis may be **discarded**.  
+   - A “last-day full thesis commit” is not acceptable, as supervisors need to verify that you have been consistently working.  
+
+---
+
+## 🚨 Mandatory Git Commit Policy
+
+- **Bi-weekly commits are required.**  
+- Each commit should represent meaningful progress (e.g., introduction draft, updated figures, conclusions refined).  
+- Supervisors will monitor your GitHub repository for activity.  
+- **No visible commit history = thesis work cannot be verified = thesis not accepted.**
+
+---
+
+## 🛠️ Git & GitHub Setup
+
+### 1. Install Git
+
+#### Linux (Ubuntu/Debian)
 ```bash
-# Update package list
 sudo apt-get update
-
-# Install XeLaTeX engine and basic TeX Live components
-sudo apt-get install texlive-xetex
-
-# Install additional required packages
-sudo apt-get install texlive-latex-extra texlive-science  # required for 'algorithmic' & 'algpseudocode'
-sudo apt-get install python3-pygments  # required for 'minted'
-sudo apt-get install texlive-bibtex-extra biber  # for bibliography management
+sudo apt-get install git
 ```
 
-### Fedora/RHEL-based distributions
+#### Fedora/RHEL
 ```bash
-# Install XeLaTeX and required packages
+sudo dnf install git
+```
+
+#### Arch Linux
+```bash
+sudo pacman -S git
+```
+
+#### Windows
+
+Download and install from [git-scm.com](git-scm.com).
+
+During installation, choose “Git from the command line” option.
+
+#### macOS
+```bash
+# With Homebrew
+brew install git
+```
+Or install from [git-scm.com](git-scm.com).
+
+### 2. Configure Git (once)
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+```
+
+### 3. Clone the Template
+
+```bash
+git clone https://github.com/ISMA-university/bsc-thesis-template.git
+cd bsc-thesis-template
+```
+
+### 4. Create Your Own GitHub Repository
+
+- On [GitHub](https://github.com/), create a new private repository named e.g. bsc-thesis-2025-YourName.
+- Link your local project to your private repository:
+
+```bash
+git remote remove origin
+git remote add origin https://github.com/YourUsername/bsc-thesis-2025_YourName.git
+git branch -M main
+git push -u origin main
+```
+
+### 5. Basic Git Commands You Will Use
+
+It is assumed that last year BSC students should know how to use de-facto world standart 
+code Version Control System (VCS). If not, no worries - it is rather simple, below are the main commands
+you will be using (in any full documentation describing all use cases can be found at [https://git-scm.com/doc](https://git-scm.com/doc)):
+
+```bash
+# Check file status
+git status
+
+# Stage all changes
+git add .
+
+# Commit with a descriptive message
+git commit -m "Draft of introduction section"
+
+# Push to GitHub
+git push
+```
+
+Make local commits regularly, ideally each focused result, make pushes of local work progress every 1–2 weeks minimum, preferably more often.
+
+## 📦 Installation of LaTeX Environment
+
+You must set up XeLaTeX and dependencies on your system. Instructions per platform:
+
+### Linux (Ubuntu/Debian)
+
+```bash
+sudo apt-get update
+sudo apt-get install texlive-xetex texlive-latex-extra texlive-science
+sudo apt-get install python3-pygments texlive-bibtex-extra biber
+```
+
+### Fedora/RHEL
+```bash
 sudo dnf install texlive-xetex texlive-latexextra texlive-science
 sudo dnf install python3-pygments texlive-biblatex biber
 ```
 
 ### Arch Linux
 ```bash
-# Install necessary packages
 sudo pacman -S texlive-core texlive-latexextra texlive-science
 sudo pacman -S python-pygments texlive-bibtexextra biber
 ```
 
-### 🪟 Windows Installation
-For Windows users, we recommend these steps:
+### Windows
 
-#### Method 1: MiKTeX (Recommended for Windows)
-1. Download and install MiKTeX:
-    - Visit MiKTeX's official website
-    - Download the basic installer (choose 64-bit or 32-bit depending on your system)
-    - Run the installer and follow the setup wizard2
-    - Select "Install missing packages on the fly" when prompted2
+- Install [MiKTeX](https://miktex.org/).
+- During installation, allow “Install missing packages on the fly.”
+- Use **MiKTeX Console** to install:
+    - `latex-extra`, `science` and `biber` dependencies.
+- Install Python from [python.org](python.org) and then:
 
-2. Install additional packages:
-
-    - After installation, open MiKTeX Console
-    - Go to "Packages" and install the following:
-      - `latex-extra` collection
-      - `science` collection
-      - `biber` tool
-      - `minted` package dependencies
-
-3. Install Python/Pygments:
-
-    - Download Python from [python.org](python.org)
-    - During installation, check "Add Python to PATH"
-    - Install Pygments using: `pip install pygments`
-
-#### Method 2: TeX Live (Full distribution)
-1. Download TeX Live:
-
-    - Visit TeX Live [website](https://www.tug.org/texlive/)
-    - Download the Windows installer
-    - Run the installer and select "Install TeX Live" (this will take longer but includes all packages)
-
-
-### 🍎 macOS Installation
-For macOS users, we recommend these steps:
-
-#### Method 1: BasicTeX (Lightweight option)
 ```bash
-# Install Homebrew (if not already installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+pip install pygments
+```
 
-# Install BasicTeX
+### macOS
+
+#### Option 1: BasicTeX (lightweight)
+
+```bash
 brew install basictex
-
-# Update tlmgr (TeX Live Manager)
 sudo tlmgr update --self
-
-# Install required packages
-sudo tlmgr install collection-latexextra
-sudo tlmgr install collection-science
-sudo tlmgr install biber
-sudo tlmgr install minted
-sudo tlmgr install xetex:cite[3]
-
-# Install Python/Pygments
+sudo tlmgr install collection-latexextra collection-science biber minted xetex
 brew install python
 pip3 install pygments
 ```
 
-#### Method 2: MacTeX (Full distribution)
-1. Download MacTeX:
+#### Option 2: Full MacTeX (recommended if you have space)
+- Download from [tug.org/mactex](tug.org/mactex)
 
-    - Visit MacTeX [website](https://www.tug.org/mactex/) 
-    - Download the MacTeX.pkg file (approximately 4.5GB)
-    - Run the installer and follow the [instructions](https://guides.nyu.edu/LaTeX/installation)
-    - MacTeX includes a complete TeX Live distribution with all necessary packages ([url](https://www.latex-project.org/get/))
+## 📖 Compilation Instructions
 
-## Compilation (to produce PDF file)
-
-To produce your PDF thesis document, run these commands in sequence:
-
+To compile your thesis to PDF:
 ```bash
-# First compilation: processes .tex file and creates .aux file
 xelatex main
-
-# Process bibliography with Biber
 biber main
-
-# Second compilation: incorporates bibliography references
 xelatex main
-
-# Third compilation: ensures all cross-references are resolved
 xelatex main
 ```
 
-## 📝 Compilation Notes
-1. Multiple compilations are necessary to resolve all cross-references, citations, and table of contents entries
-
-2. If you make changes to your bibliography, you must rerun the entire compilation sequence
-
-3. For large documents, consider using a compilation script or Makefile
-
-## 🔧 Troubleshooting Common Issues
-**XeLaTeX not found error**
-- Linux: Ensure texlive-xetex package is installed15
-- Windows/macOS: Verify your TeX distribution is properly installed and added to PATH
-
-**Font issues**
-- XeLaTeX supports system fonts; specify them by name in your document
-- For custom fonts, place them in your project directory and reference them appropriately10
-
-## Editor to use
-
-### VS Code + plugin LaTeX Workshop 
-VSCode is a lightweight IDE, when equipped with plugins can serve many purposes.
-Open the folder with the project and hit **Build**.
-
-Alternative - enter build commands in the terminal window of the VSCode.
-
-### TeXStudio
-[TexStudio](https://www.texstudio.org/) is another free option.
-
-## 💡 Alternative: Online LaTeX Editors
-If you prefer not to install LaTeX locally, consider these online options:
-
-  - Overleaf: Professional online LaTeX editor with real-time collaboration (upload whole project into Overleaf):
-    - Supports XeLaTeX compilation10
-    - No installation required
-    - Free Overleaf Professional accounts available for NYU students (check if your institution offers similar)
-
-For more detailed information, consult the official documentation of [TeX Live](https://www.tug.org/texlive/) or [MiKTeX](https://miktex.org/).
-
-Remember that LaTeX distributions are regularly updated, so you may want to periodically update your installation to get the latest packages and bug fixes.
-
-## Highlights
-- **A4**, **twoside** with **mirrored margins**: inner=3cm, outer=2cm, top=3cm, bottom=2cm.
-- **12pt**, **Times New Roman** by default (switch to **Calibri** using class option `calibri`).
-- **1.5 line spacing**; black text.
-- **Outer-corner page numbers** using `fancyhdr` (upper-right on odd pages, upper-left on even pages).
-- **Headings in Bold**; you control capitalization.
-- **Tables**: caption **above**; **Figures**: caption **below**; both numbered per chapter (e.g., 2.1).
-- **Formulas** numbered per chapter: (2.3).
-- **References** via `biblatex`; choose `authoryear` (inline) or `verbose-note` (footnotes) by class option.
-- **Front matter** (title/abstracts/ToC) pages are unnumbered; numbering starts at **Introduction**.
-- **Multilingual support** (English/Latvian/Russian) with `polyglossia`.
+You might wonder why multiple 'xelatex' runs are needed - thats for references and cross-links.
 
 
-## Notes on the Guidelines
-- Ensure **each chapter/section** starts with your own introductory text (avoid starting/ending with a float).
-- Place large tables/figures (> 2/3 page) in **Appendices** and reference them from the body.
-- Keep **two headings** from following each other directly; ensure the proper spacing (class sets reasonable defaults).
-- Ensure **analysis** accompanies tables/figures in the text.
-- For quotes and references, keep consistency of the chosen **citation option** across the whole thesis.
+## 📝 Notes for Students
 
-Happy writing!
+- Always start your thesis work by pulling the latest template updates (if any).
+- Keep a clean commit history (avoid uploading temporary files).
+- Use `.gitignore` (already included) to avoid committing unnecessary build files.
+- If you face issues with LaTeX compilation, consult your supervisor or the provided troubleshooting section.
+- Use English or Latvian consistently for your thesis, unless instructed otherwise.
+
+## 💡 Editor Suggestions
+
+- VS Code with LaTeX Workshop plugin (recommended).
+- TeXStudio (free, user-friendly).
+- Overleaf (online, if local setup fails).
+
+In regards to feedback - you can:
+- give direct feedback, plain text in email;
+- Issue tracking - you can create issues in the repository (but student have to give you writing permissions), still your will have to refer to the places in text;
+- PullRequests - most advanced but allow to review each commits series and comment on a specic places of edited files.
+
+## 📊 Highlights (Template Features)
+
+- A4, mirrored margins.
+- Times New Roman 12pt font (default).
+- 1.5 line spacing.
+- Figures below, tables above captions.
+- Chapter-based numbering (e.g., Table 2.3).
+- BibLaTeX + Biber for bibliography.
+- Multilingual support (EN/LV/RU).
+- Appendices & examples included.
+
+## 🚀 Final Checklist Before Submission
+
+1. Thesis structure complete (Introduction → Chapters → Conclusions → References → Appendices).
+2. Commit history visible, with at least bi-weekly progress updates.
+3. PDF compiles without errors.
+4. Supervisor has approved your contents and structure.
+5. Keywords, abstract, and title page filled correctly in both English and Latvian.
+
+---
+
+Happy writing, and remember: commit often, commit meaningfully (mind commit messages!), and push to GitHub regularly!
