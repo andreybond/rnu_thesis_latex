@@ -2,6 +2,8 @@
 
 This template implements the key layout and styling rules from the provided ISMA guidelines (A4, 12pt, Times New Roman/Calibri, 1.5 line spacing, mirrored margins, outer page numbers, table/figure caption placement, chapter-based numbering, and an alphabetized bibliography).
 
+Detailed LaTeX documentation can be found at \url{https://www.latex-project.org/help/documentation/}
+
 ## Installation
 
 To use this thesis template on Linux systems, you'll need to install XeLaTeX and additional packages:
@@ -107,36 +109,29 @@ To produce your PDF thesis document, run these commands in sequence:
 
 ```bash
 # First compilation: processes .tex file and creates .aux file
-xelatex -shell-escape main
+xelatex main
 
 # Process bibliography with Biber
 biber main
 
 # Second compilation: incorporates bibliography references
-xelatex -shell-escape main
+xelatex main
 
 # Third compilation: ensures all cross-references are resolved
-xelatex -shell-escape main
+xelatex main
 ```
 
 ## 📝 Compilation Notes
-1. The `-shell-escape` parameter is required for the minted package to execute Python Pygments for syntax highlighting
+1. Multiple compilations are necessary to resolve all cross-references, citations, and table of contents entries
 
-2. Multiple compilations are necessary to resolve all cross-references, citations, and table of contents entries
+2. If you make changes to your bibliography, you must rerun the entire compilation sequence
 
-3. If you make changes to your bibliography, you must rerun the entire compilation sequence
-
-4. For large documents, consider using a compilation script or Makefile
+3. For large documents, consider using a compilation script or Makefile
 
 ## 🔧 Troubleshooting Common Issues
 **XeLaTeX not found error**
 - Linux: Ensure texlive-xetex package is installed15
 - Windows/macOS: Verify your TeX distribution is properly installed and added to PATH
-
-**Minted package errors**
-- Ensure Python and Pygments are installed
-- Verify -shell-escape is enabled
-- Check that Pygments is accessible from your command line
 
 **Font issues**
 - XeLaTeX supports system fonts; specify them by name in your document

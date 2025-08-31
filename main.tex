@@ -6,6 +6,11 @@
 \usepackage{algorithm}
 \usepackage{algpseudocode}
 
+\usepackage{tikz} % harmless if already loaded via the class
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,shapes.symbols,fit,calc,matrix,graphs}
+\tikzset{>=Stealth}
+
+
 % % --- Code listings with minted (creates a 'listing' float)
 % \usepackage[newfloat]{minted} % compile with -shell-escape
 % --- Code listings without external deps
@@ -116,6 +121,7 @@
 % ===== Appendices =====
 \appendix
 \input{y_backmatter/appendices/appendixA}
+\input{y_backmatter/appendices/appendixB}
 
 % ===== Declarations & Acknowledgments (if needed at end) =====
 \input{y_backmatter/declaration}

@@ -1,4 +1,4 @@
-\chapter{Appendix A — LaTeX Hints}
+\chapter{LaTeX Hints}
 \label{chap:latexhints}
 
 
@@ -173,16 +173,54 @@ def bubble(a):
 
 We can reference \cref{alg:greedy-app,lst:bubble-app}.
 
-\section{TikZ and (optional) pgfplots}
-A tiny TikZ graphic:
+% \section{TikZ and (optional) pgfplots}
+% A tiny TikZ graphic:
+% \begin{figure}[h]
+%   \centering
+%   \begin{tikzpicture}
+%     \draw (0,0) rectangle (2,1);
+%     \foreach \x in {0.25,0.5,...,1.75} \draw (\x,0.5) circle (1pt);
+%   \end{tikzpicture}
+%   \caption{Simple TikZ demo.}
+% \end{figure}
+
+\par\noindent
+\section{TikZ: Trie data structure diagram}
+
+TikZ is a powerwfull diagraming, graphing engine allowing you to script creation of the
+diagrams. Refer to \url{https://tikz.dev/} for online documentation and examples.
+
 \begin{figure}[h]
   \centering
-  \begin{tikzpicture}
-    \draw (0,0) rectangle (2,1);
-    \foreach \x in {0.25,0.5,...,1.75} \draw (\x,0.5) circle (1pt);
-  \end{tikzpicture}
-  \caption{Simple TikZ demo.}
+  \tikz [>={To[sep]}, rotate=90, xscale=-1,
+         mark/.style={fill=black!50}, mark/.default=]
+    \graph [trie, simple,
+            nodes={circle,draw},
+            edges={nodes={
+                inner sep=1pt, anchor=mid,
+                fill=yellow!20}}, % yellowish background
+            put node text on incoming edges]
+      {
+        root[mark] -> {
+          a -> n -> {
+            g [mark],
+            f -> a -> n -> g [mark]
+          },
+          f -> a -> n -> g [mark],
+          g[mark],
+          n -> {
+            g[mark],
+            f -> a -> n -> g[mark]
+          }
+        },
+        { [edges=red] % highlight one path
+          root -> f -> a -> n
+        }
+      };
+  \caption{Trie data structure demonstrating graph-based TikZ syntax with highlighted path.}
+  \label{fig:tikz-trie-demo}
 \end{figure}
+
 
 If \texttt{pgfplots} is installed (we auto-load it if present), a quick plot:
 \IfFileExists{pgfplots.sty}{%
