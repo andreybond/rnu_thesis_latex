@@ -1,6 +1,6 @@
-# ISMA BSc Thesis LaTeX Template (XeLaTeX)
+# RNU BSc Thesis LaTeX Template (XeLaTeX)
 
-This template implements the key layout and styling rules from the provided ISMA guidelines (A4, 12pt, Times New Roman/Calibri, 1.5 line spacing, mirrored margins, outer page numbers, table/figure caption placement, chapter-based numbering, and an alphabetized bibliography).
+This template implements the key layout and styling rules from the provided RNU guidelines (A4, 12pt, Times New Roman/Calibri, 1.5 line spacing, mirrored margins, outer page numbers, table/figure caption placement, chapter-based numbering, and an alphabetized bibliography).
 
 Detailed LaTeX documentation can be found at [latex-project.org](https://www.latex-project.org/help/documentation/)
 
@@ -13,7 +13,7 @@ When your **BSc thesis topic** is approved by your supervisor and officially sub
 1. **Create a GitHub account** (if you do not already have one).  
    - [Sign up here](https://github.com/join).  
 
-2. **Clone this repository** (the official ISMA thesis template) to your own private GitHub repository.  
+2. **Clone this repository** (the official RNU thesis template) to your own private GitHub repository.  
    - This will ensure your thesis work is version-controlled and progress is visible.  
 
 3. **Set up LaTeX** on your computer (see installation instructions below).  
@@ -80,7 +80,7 @@ git config --global user.email "your@email.com"
 ### 3. Clone the Template
 
 ```bash
-git clone https://github.com/ISMA-university/bsc-thesis-template.git
+git clone https://github.com/RNU-university/bsc-thesis-template.git
 cd bsc-thesis-template
 ```
 

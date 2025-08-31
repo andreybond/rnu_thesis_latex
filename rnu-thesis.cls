@@ -1,5 +1,5 @@
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{isma-thesis}[2025/08/27 ISMA Bachelor Thesis Class]
+\ProvidesClass{rnu-thesis}[2025/08/27 RNU Bachelor Thesis Class]
 
 % \LoadClass[12pt,a4paper,oneside]{book}
 \LoadClass[12pt,a4paper,oneside,openany]{book}
@@ -243,8 +243,8 @@
 
 % ===== Logo & Title-Block helpers =====
 % Path & size can be changed here instead of inside the macro
-\newcommand{\ismalogopath}{a_frontmatter/assets/isma_logo.png}
-\newcommand{\ismalogowidth}{42mm} % tweak as needed for wide logo
+\newcommand{\rnulogopath}{a_frontmatter/assets/RNU_large_logo.png}
+\newcommand{\rnulogowidth}{52mm} % tweak as needed for wide logo
 
 % 16pt bold helper
 \newcommand{\sixteenptbf}{\bfseries\fontsize{16pt}{16pt}\selectfont}
@@ -257,7 +257,7 @@
 
   % --- Top-left wide logo ---
   \noindent
-  \includegraphics[width=\ismalogowidth]{\ismalogopath}
+  \includegraphics[width=\rnulogowidth]{\rnulogopath}
 
   \vspace{6mm}
 
@@ -283,8 +283,8 @@
   \vspace{10mm}
 
   \begin{center}
-    {\Large INFORMĀCIJAS SISTĒMU MENEDŽMENTA AUGSTSKOLA}\\[2mm]
-    {\large (ISMA)}\\[8mm]
+    {\Large Rīgas Ziemeļvalstu Universitāte}\\[2mm]
+    {\large (RZU)}\\[8mm]
 
     {\bfseries\fontsize{16pt}{16pt}\selectfont \thesistitle}\\[10mm]
     {\bfseries\large BAKALAURA DARBS}\\[18mm]
